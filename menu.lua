@@ -997,7 +997,7 @@ function menu_draw()
 			end
 
 			properprint("mode:", 30*scale, 65*scale)
-			properprint("{" .. playertype .. "}", (180-(string.len(playertype)+2)*8)*scale, 65*scale)
+			properprint("{" .. playertype .. "}", (200-(string.len(playertype)+2)*8)*scale, 65*scale)
 
 			if optionsselection == 3 then
 				love.graphics.setColor(1, 1, 1, 1)
@@ -1005,11 +1005,11 @@ function menu_draw()
 				love.graphics.setColor(0.4, 0.4, 0.4)
 			end
 
-			properprint("knockback:", 30*scale, 80*scale)
+			properprint("knockback:", 30*scale, 75*scale)
 			if portalknockback then
-				properprint("on", (180-16)*scale, 80*scale)
+				properprint("on", (200-16)*scale, 75*scale)
 			else
-				properprint("off", (180-24)*scale, 80*scale)
+				properprint("off", (200-24)*scale, 75*scale)
 			end
 
 			if optionsselection == 4 then
@@ -1018,12 +1018,12 @@ function menu_draw()
 				love.graphics.setColor(0.4, 0.4, 0.4)
 			end
 
-			properprint("bullettime:", 30*scale, 95*scale)
-			properprint("use mousewheel", 30*scale, 105*scale)
+			properprint("bullettime:", 30*scale, 85*scale)
+			properprint("use mousewheel", 30*scale, 95*scale)
 			if bullettime then
-				properprint("on", (180-16)*scale, 95*scale)
+				properprint("on", (200-16)*scale, 85*scale)
 			else
-				properprint("off", (180-24)*scale, 95*scale)
+				properprint("off", (200-24)*scale, 85*scale)
 			end
 
 			if optionsselection == 5 then
@@ -1032,11 +1032,11 @@ function menu_draw()
 				love.graphics.setColor(0.4, 0.4, 0.4)
 			end
 
-			properprint("huge mario:", 30*scale, 120*scale)
+			properprint("huge mario:", 30*scale, 105*scale)
 			if bigmario then
-				properprint("on", (180-16)*scale, 120*scale)
+				properprint("on", (200-16)*scale, 105*scale)
 			else
-				properprint("off", (180-24)*scale, 120*scale)
+				properprint("off", (200-24)*scale, 105*scale)
 			end
 
 			if optionsselection == 6 then
@@ -1045,11 +1045,11 @@ function menu_draw()
 				love.graphics.setColor(0.4, 0.4, 0.4)
 			end
 
-			properprint("goomba attack:", 30*scale, 135*scale)
+			properprint("goomba attack:", 30*scale, 115*scale)
 			if goombaattack then
-				properprint("on", (180-16)*scale, 135*scale)
+				properprint("on", (200-16)*scale, 115*scale)
 			else
-				properprint("off", (180-24)*scale, 135*scale)
+				properprint("off", (200-24)*scale, 115*scale)
 			end
 
 			if optionsselection == 7 then
@@ -1058,11 +1058,11 @@ function menu_draw()
 				love.graphics.setColor(0.4, 0.4, 0.4)
 			end
 
-			properprint("sonic rainboom:", 30*scale, 150*scale)
+			properprint("sonic rainboom:", 30*scale, 125*scale)
 			if sonicrainboom then
-				properprint("on", (180-16)*scale, 150*scale)
+				properprint("on", (200-16)*scale, 125*scale)
 			else
-				properprint("off", (180-24)*scale, 150*scale)
+				properprint("off", (200-24)*scale, 125*scale)
 			end
 
 			if optionsselection == 8 then
@@ -1071,11 +1071,11 @@ function menu_draw()
 				love.graphics.setColor(0.4, 0.4, 0.4)
 			end
 
-			properprint("playercollision:", 30*scale, 165*scale)
+			properprint("playercollision:", 30*scale, 135*scale)
 			if playercollisions then
-				properprint("on", (180-16)*scale, 165*scale)
+				properprint("on", (200-16)*scale, 135*scale)
 			else
-				properprint("off", (180-24)*scale, 165*scale)
+				properprint("off", (200-24)*scale, 135*scale)
 			end
 
 			if optionsselection == 9 then
@@ -1084,11 +1084,11 @@ function menu_draw()
 				love.graphics.setColor(0.4, 0.4, 0.4)
 			end
 
-			properprint("infinite time:", 30*scale, 180*scale)
+			properprint("infinite time:", 30*scale, 145*scale)
 			if infinitetime then
-				properprint("on", (180-16)*scale, 180*scale)
+				properprint("on", (200-16)*scale, 145*scale)
 			else
-				properprint("off", (180-24)*scale, 180*scale)
+				properprint("off", (200-24)*scale, 145*scale)
 			end
 
 			if optionsselection == 10 then
@@ -1097,11 +1097,50 @@ function menu_draw()
 				love.graphics.setColor(0.4, 0.4, 0.4)
 			end
 
-			properprint("infinite lives:", 30*scale, 195*scale)
+			properprint("infinite lives:", 30*scale, 155*scale)
 			if infinitelives then
-				properprint("on", (180-16)*scale, 195*scale)
+				properprint("on", (200-16)*scale, 155*scale)
 			else
-				properprint("off", (180-24)*scale, 195*scale)
+				properprint("off", (200-24)*scale, 155*scale)
+			end
+
+			if optionsselection == 11 then
+				love.graphics.setColor(255, 255, 255, 255)
+			else
+				love.graphics.setColor(100, 100, 100, 255)
+			end
+
+			properprint("always have fire:", 30*scale, 165*scale)
+			if alwaysfiery then
+				properprint("on", (200-16)*scale, 165*scale)
+			else
+				properprint("off", (200-24)*scale, 165*scale)
+			end
+
+			if optionsselection == 12 then
+				love.graphics.setColor(255, 255, 255, 255)
+			else
+				love.graphics.setColor(100, 100, 100, 255)
+			end
+
+			properprint("never shrink:", 30*scale, 175*scale)
+			if nevershrink then
+				properprint("on", (200-16)*scale, 175*scale)
+			else
+				properprint("off", (200-24)*scale, 175*scale)
+			end
+
+			if optionsselection == 13 then
+				love.graphics.setColor(255, 255, 255, 255)
+			else
+				love.graphics.setColor(100, 100, 100, 255)
+			end
+
+			properprint("never die:", 30*scale, 185*scale)
+			if neverdie then
+				properprint("on", (200-16)*scale, 185*scale)
+			else
+				properprint("off", (200-24)*scale, 185*scale)
 			end
 		end
 	end
@@ -1786,7 +1825,7 @@ function menu_keypressed(key, unicode)
 					optionsselection = 1
 				end
 			elseif optionstab == 4 and gamefinished then
-				if optionsselection < 10 then
+				if optionsselection < 13 then
 					optionsselection = optionsselection + 1
 				else
 					optionsselection = 1
@@ -1807,7 +1846,7 @@ function menu_keypressed(key, unicode)
 				elseif optionstab == 3 then
 					optionsselection = 8
 				elseif optionstab == 4 and gamefinished then
-					optionsselection = 10
+					optionsselection = 13
 				end
 			end
 		elseif (key == "right" or key == "d") then
@@ -1911,6 +1950,12 @@ function menu_keypressed(key, unicode)
 					infinitetime = not infinitetime
 				elseif optionsselection == 10 then
 					infinitelives = not infinitelives
+				elseif optionsselection == 11 then
+					alwaysfiery = not alwaysfiery
+				elseif optionsselection == 12 then
+					nevershrink = not nevershrink
+				elseif optionsselection == 13 then
+					neverdie = not neverdie
 				end
 			end
 		elseif (key == "left" or key == "a") then
@@ -2015,6 +2060,12 @@ function menu_keypressed(key, unicode)
 					infinitetime = not infinitetime
 				elseif optionsselection == 10 then
 					infinitelives = not infinitelives
+				elseif optionsselection == 11 then
+					alwaysfiery = not alwaysfiery
+				elseif optionsselection == 12 then
+					nevershrink = not nevershrink
+				elseif optionsselection == 13 then
+					neverdie = not neverdie
 				end
 			end
 		elseif key == "escape" then

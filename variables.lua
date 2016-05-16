@@ -43,7 +43,7 @@ jumpforce = 16--SMB: 16, Smaller(For portal?): 12.1
 jumpforceadd = 1.9 --how much jumpforce is added at top speed (linear)
 headforce = 2 --how fast mario will be sent back down when hitting a block with his head
 --bounceforce = 12 --when jumping on an enemy, speedy will be set to this to make mario bounce (negative)
-bounceheight = 14/16 --when jumping on enemy, the height that mario will fly up
+bounceheight = 16/16 --when jumping on enemy, the height that mario will fly up
 passivespeed = 4 --speed that mario is moved against the pointing direction when inside blocks (by crouch sliding under low blocks and standing up for example)
 
 --Variables that are different for underwater
@@ -84,7 +84,7 @@ horbounceminspeedx = 2
 --items
 mushroomspeed = 3.6
 mushroomtime = 0.7 --time until it fully emerged out the block
-mushroomjumpforce = 13
+mushroomjumpforce = 16
 starjumpforce = 13
 staranimationdelay = 0.04
 mariostarblinkrate = 0.08 --/disco
@@ -392,6 +392,9 @@ gelcannondelay = 0.05
 gelcannonspeed = 30
 infinitetime = false
 infinitelives = false
+alwaysfiery = false
+nevershrink = false
+neverdie = false
 
 pausemenuoptions = {"resume", "suspend", "volume", "quit to", "quit to"}
 pausemenuoptions2 = {"", "", "", "menu", "desktop"}

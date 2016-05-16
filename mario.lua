@@ -72,6 +72,10 @@ function mario:init(x, y, i, animation, size, t)
 		self.quadcenterY = 10
 
 		self.graphic = self.smallgraphic
+
+		if alwaysfiery then
+			self.colors = flowercolor
+		end
 	else
 		self.graphic = self.biggraphic
 
@@ -83,7 +87,7 @@ function mario:init(x, y, i, animation, size, t)
 		self.y = self.y - 12/16
 		self.height = 24/16
 
-		if self.size == 3 then
+		if self.size == 3 or alwaysfiery then
 			self.colors = flowercolor
 		end
 	end
@@ -284,7 +288,7 @@ function mario:update(dt)
 		end
 
 		if self.startimer >= mariostarduration then
-			if self.size == 3 then --flower colors
+			if self.size == 3 or alwaysfiery then --flower colors
 				self.colors = flowercolor
 			else
 				self.colors = mariocolors[self.playernumber]
@@ -681,22 +685,30 @@ function mario:update(dt)
 		if frame == 1 then
 			self.graphic = self.biggraphic
 			self:setquad("idle", 2)
-			self.quadcenterY = 32
-			self.quadcenterX = 9
-			self.offsetY = -3
+			if not nevershrink then
+				self.quadcenterY = 32
+				self.quadcenterX = 9
+				self.offsetY = -3
+			end
 			self.animationstate = "idle"
 		else
-			self.graphic = self.smallgraphic
-			self.quadcenterX = 11
-			self.offsetY = 3
+			if not nevershrink then
+				self.graphic = self.smallgraphic
+				self.quadcenterX = 11
+				self.offsetY = 3
+			end
 			if frame == 2 then
 				self.animationstate = "grow"
 				self:setquad("grow")
-				self.quadcenterY = 16
+				if not nevershrink then
+					self.quadcenterY = 16
+				end
 			else
 				self.animationstate = "idle"
 				self:setquad()
-				self.quadcenterY = 10
+				if not nevershrink then
+					self.quadcenterY = 10
+				end
 			end
 		end
 
@@ -713,12 +725,14 @@ function mario:update(dt)
 			self.animation = "invincible"
 			self.invincible = true
 			noupdate = false
-			self.quadcenterY = 10
-			self.graphic = self.smallgraphic
 			self.animationtimer = 0
-			self.quadcenterX = 11
-			self.offsetY = 3
 			self.drawable = true
+			if not nevershrink then
+				self.quadcenterX = 11
+				self.quadcenterY = 10
+				self.offsetY = 3
+				self.graphic = self.smallgraphic
+			end
 		end
 		return
 	elseif self.animation == "invincible" then
@@ -926,7 +940,7 @@ function mario:update(dt)
 			end
 		end
 
-		--check for pipe pipe pipe�
+		--check for pipe pipe pipeІ
 		if inmap(math.floor(self.x+30/16), math.floor(self.y+self.height+20/16)) and downkey(self.playernumber) and self.falling == false and self.jumping == false then
 			local t2 = map[math.floor(self.x+30/16)][math.floor(self.y+self.height+20/16)][2]
 			if t2 and entityquads[t2].t == "pipe" then
@@ -1033,7 +1047,7 @@ function mario:updateangle()
 				x = -x
 			end
 		end
-		
+
 		s = controls[self.playernumber]["aimy"]
 		if s[1] == "joy" and joysticks[s[2]] ~= nil then
 			y = -joysticks[s[2]]:getAxis(s[4])
@@ -1638,15 +1652,29 @@ function mario:grow()
 	if self.size > 2 then
 
 	else
-		self.size = self.size + 1
+		local prevsize = self.size
+
+		if alwaysfiery then
+			self.size = 3
+		else
+			self.size = self.size + 1
+		end
+
 		if self.size == 2 then
 			self.y = self.y - 12/16
 			self.height = 24/16
 		elseif self.size == 3 then
+			if alwaysfiery and prevsize == 1 then
+				self.y = self.y - 12/16
+				self.height = 24/16
+			end
+
 			self.colors = flowercolor
 		end
 
 		if self.size == 2 then
+			self.animation = "grow1"
+		elseif alwaysfiery and prevsize == 1 then
 			self.animation = "grow1"
 		else
 			self.animation = "grow2"
@@ -1669,17 +1697,25 @@ function mario:shrink()
 	end
 	playsound(shrinksound)
 
-	self.size = 1
+	if not nevershrink then
+		self.size = 1
+	end
 
-	self.colors = mariocolors[self.playernumber]
+	if alwaysfiery then
+		self.colors = flowercolor
+	elseif not nevershrink then
+		self.colors = mariocolors[self.playernumber]
+	end
 
 	self.animation = "shrink"
 	self.drawable = true
 	self.invincible = true
 	self.animationtimer = 0
 
-	self.y = self.y + 12/16
-	self.height = 12/16
+	if not nevershrink then
+		self.y = self.y + 12/16
+		self.height = 12/16
+	end
 
 	noupdate = true
 end
@@ -2600,6 +2636,10 @@ function mario:die(how)
 			self:shrink()
 			return
 		end
+
+		if neverdie then
+			return
+		end
 	elseif how ~= "time" then
 		if bonusstage then
 			levelscreen_load("sublevel", 0)
@@ -3049,7 +3089,7 @@ function mario:star()
 end
 
 function mario:fire()
-	if not noupdate and self.controlsenabled and self.size == 3 and self.ducking == false then
+	if not noupdate and self.controlsenabled and not self.ducking and (self.size == 3 or alwaysfiery) then
 		if self.fireballcount < maxfireballs then
 			local dir = "right"
 			if self.pointingangle > 0 then
